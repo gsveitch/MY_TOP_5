@@ -1,4 +1,4 @@
-# Project Name #
+# My Top 5 #
 
 <!-- 
 > This material was originally posted [here](http://www.quora.com/What-is-Amazons-approach-to-product-development-and-product-management). It is reproduced here for posterities sake.
@@ -19,26 +19,44 @@ Once the project moves into development, the press release can be used as a touc
 ## Heading ##
   > Name the product in a way the reader (i.e. your target customers) will understand.
 
+  > My Top 5
+
 ## Sub-Heading ##
   > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
+
+  > Create and share lists of your favorite movies
 
 ## Summary ##
   > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
 
+  > Think you know the all-time best romantic comedies? Looking for a good reccomendation for an action-packed holiday movie? Check out My Top 5 where you can create, share, search for, and vote on top 5 lists for any category of film. 
+
 ## Problem ##
   > Describe the problem your product solves.
+
+  > Netflix and iTunes reccomendations can get old quick. Find creative and fun lists put together by real people and make your own as well.
 
 ## Solution ##
   > Describe how your product elegantly solves the problem.
 
+  > Build a community based arount creative top 5 lists.
+
 ## Quote from You ##
   > A quote from a spokesperson in your company.
 
+  > "See if you can top my top 5 expressionistic French films!"
+
 ## How to Get Started ##
   > Describe how easy it is to get started.
+  
+  > Just visit the site and browse through the lists until you find one you like. Sign in with a username to make your own.
 
 ## Customer Quote ##
   > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
 
+  > "I love making top 5 lists and watching the ratings go up as people discover the movies I love!"
+
 ## Closing and Call to Action ##
   > Wrap it up and give pointers where the reader should go next.
+
+  > Keep an eye on us for more features rolling out soon.
