@@ -17,9 +17,10 @@ db.once('open', () => {
 });
 
 //ROUTES
-app.get('/', (req, res) => {
-    res.send('hello world');
-});
+app.use(express.static('client'));
+// app.get('/', (req, res) => {
+//     res.send('hello world');
+// });
 
 //NOW LISTEN
 app.listen(PORT, (err) => {
