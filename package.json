@@ -1,0 +1,30 @@
+{
+  "name": "my_top_5",
+  "version": "1.0.0",
+  "description": "minimum viable product my top 5",
+  "main": "server.js",
+  "scripts": {
+    "test": "test",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gsveitch/MY_TOP_5.git"
+  },
+  "keywords": [
+    "mvp"
+  ],
+  "author": "gsveitch",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gsveitch/MY_TOP_5/issues"
+  },
+  "homepage": "https://github.com/gsveitch/MY_TOP_5#readme",
+  "dependencies": {
+    "dotenv": "^4.0.0",
+    "express": "^4.16.2"
+  },
+  "devDependencies": {
+    "mongoose": "^4.13.7"
+  }
+}
