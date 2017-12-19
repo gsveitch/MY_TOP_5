@@ -5,19 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>My Top 5</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.js"></script>
     <script src='index.js'></script>
 </head>
-<body ng-app="app">
-    <!-- old way, take this out, use components -->
-    <div ng-controller="appCtrl">
-        <form ng-submit="submit(name, text)">
-            <input type="text" ng-model="name">
-            <input type="text" ng-model="text">
-            <button type="text">Submit</button>
-        </form>
-        <!-- take this form out and make a component -->
+<body>
+    <div ng-app="app">
+        <app />
+        <h2>My Top 5</h2>
+        <!-- old way, take this out, use components -->
+        <div>
+            <form ng-submit="submit(name, text)">
+                <input type="text" ng-model="name">
+                <input type="text" ng-model="text">
+                <button type="text">Submit</button>
+            </form>
+            <!-- take this form out and make a component -->
+        </div>
     </div>
-    hello world from index.html!!!
 </body>
 </html>

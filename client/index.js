@@ -1,4 +1,1 @@
-angular.module('app', [])
-    .controller('appCtrl', function() {
-        console.log('hi from controller');
-    })
+angular.module('app', []);
