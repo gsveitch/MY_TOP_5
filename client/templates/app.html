@@ -1,13 +1,19 @@
 <div>
     <h1>My real Top 5</h1>
     <nav>
-        <button type="button" class="btn btn-primary">Home</button>
-        <button type="button" class="btn btn-success">Make a Top 5 list!</button>
+        <button type="button" class="btn btn-primary" ng-click="$ctrl.displayHome()">Home</button>
+        <button type="button" class="btn btn-success" ng-click="$ctrl.displayMaker()">Make a Top 5 list!</button>
     </nav>
-    <div ng-if="$ctrl.home">
+    <div ng-if="$ctrl.whereAmI === 'home'">
         <!-- attach home module /> -->
+        <span>HOME</span>
     </div>
-    <div ng-if="!ctrl.home">
-        <!-- attach make module -->
+    <div ng-if="$ctrl.whereAmI === 'maker'">
+        <!-- attach maker module -->
+        <span>MAKER</span>
+    </div>
+    <div ng-if="$ctrl.whereAmI === 'top5'">
+        <!-- attach top5 module -->
+        <span>TOP5</span>
     </div>
 </div>
