@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 
 
-var PORT = process.env.PORT || 3000;
+var PORT = process.env.PORT
 // UNCOMMENT THE DATABASE YOU'D LIKE TO USE
 var items = require('../database-mongo');
 
