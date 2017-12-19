@@ -18,9 +18,7 @@ db.once('open', () => {
 
 //ROUTES
 app.use(express.static('client'));
-// app.get('/', (req, res) => {
-//     res.send('hello world');
-// });
+
 
 //NOW LISTEN
 app.listen(PORT, (err) => {

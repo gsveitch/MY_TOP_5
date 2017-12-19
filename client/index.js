@@ -1,1 +1,1 @@
-angular.module('app', []);
+angular.module('my-top-5', []);
