@@ -2,7 +2,7 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
-var PORT = process.env.PORT;
+const PORT = process.env.PORT;
 
 // MONGOOSE REQUIREMENTS
 const { MONGO_URI } = process.env;
@@ -13,7 +13,7 @@ mongoose.connect(MONGO_URI, {useMongoClient: true});
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
-    console.log(`connected to mongoose at ${MONGO_URI}`)
+    console.log(`connected to mongoose at ${MONGO_URI}`);
 });
 
 //ROUTES
@@ -21,9 +21,8 @@ app.get('/', (req, res) => {
     res.send('hello world');
 });
 
-
 //NOW LISTEN
 app.listen(PORT, (err) => {
-    console.log(err || `listening on port ${PORT}`)
+    console.log(err || `listening on port ${PORT}`);
 });
 
