@@ -10,6 +10,12 @@ angular.module('movie-shelf')
     }
     this.addMovie = this.addMovie.bind(this);
 
+    this.searchResults = (movies) => {
+      this.movies = movies;
+      console.log('UPDATED MOVIES', this.movies);
+    };
+    this.searchResults = this.searchResults.bind(this);
+
   },
 
   templateUrl: '/templates/app.html'
