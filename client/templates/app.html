@@ -1,5 +1,5 @@
 <div>
-    <h1>Movie Shelf</h1>
+    <h1>My Movie Shelf</h1>
     <nav>
         search for a movie!
         <search result="$ctrl.searchResults"></search>
@@ -11,13 +11,12 @@
                 <!-- search results list goes here -->
                 <movie-list
                     movies="$ctrl.movies"
-                    on-click="$ctrl.addMovie"
                 ></movie-list>
             </div>
             <div class="col-sm-5">
                 movie shelf goes here
                 <shelf
-                    my-movies="$ctrl.myMovies"
+                    my-movies="$ctrl.shelf"
                 ></shelf>
             </div>
         </div>
