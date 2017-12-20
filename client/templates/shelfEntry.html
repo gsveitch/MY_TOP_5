@@ -5,6 +5,13 @@
     <div class="media-body">
         <h3>{{$ctrl.movie.trackName}}</h3>
         <button type="button" class="btn btn-danger btn-xs" ng-click="$ctrl.reMovie($ctrl.movie)">Take off shelf</button>
-        <button type="button" class="btn btn-info btn-xs" ng-click="$ctrl.leaveComment($ctrl.movie)">Add a comment</button>
+        <button type="button" class="btn btn-info btn-xs" ng-click="$ctrl.showBox($ctrl.movie)">Add a note</button>
+    </div>
+    <div ng-if="$ctrl.box">
+        <textarea class="form-control" rows="2" ng-model="note"></textarea>
+        <button type="button" class="btn btn-success btn-xs" ng-click="$ctrl.leaveComment(note)">Add</button>
+        <ul ng-if="$ctrl.comments.length">
+            <li ng-repeat="comment in $ctrl.comments">{{comment}}</li>
+        </ul>
     </div>
 </li>

@@ -1,7 +1,8 @@
 angular.module("movie-shelf")
   .component("shelf", {
     bindings: {
-      myMovies: "<"
+      myMovies: "<",
+      spliceit: "<"
     },
     controller: function (server) {
     

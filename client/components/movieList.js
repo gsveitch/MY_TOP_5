@@ -2,7 +2,10 @@ angular.module('movie-shelf')
   .component('movieList', {
     bindings: {
       movies: '<',
+      pushit: '<'
     },
-    controller: function () { },
+    controller: function () { 
+      
+    },
     templateUrl: '/templates/movieList.html'
   });
