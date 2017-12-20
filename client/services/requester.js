@@ -5,7 +5,6 @@ angular.module('movie-shelf')
         .get('https://itunes.apple.com/search?country=us&entity=movie&attribute=featureFilmTerm&limit=10&lang=en_us&term=' + query)
         .then(function (response) {
           if (callback) {
-            console.log('response from itunes', response)
             callback(response.data);
           }
         })

@@ -2,25 +2,45 @@ angular.module('movie-shelf')
 
 .component('app', {
   controller: function() {
-    this.movies = window.fakeMovieData; //<-----------------------change this to real data
-    this.myMovies = [];
+    this.movies = []; //<-----------------------change this to real data
+    this.shelf = [];
 
     this.addMovie = (movie) => {
       this.shelf.unshift(movie);
     }
     this.addMovie = this.addMovie.bind(this);
 
-    this.searchResults = (movies) => {
-      this.movies = movies;
+    this.searchResults = (data) => {
+      this.movies = data.results;
       console.log('UPDATED MOVIES', this.movies);
     };
-    this.searchResults = this.searchResults.bind(this);
+    // this.searchResults = this.searchResults.bind(this);
 
   },
 
   templateUrl: '/templates/app.html'
 
 });
+
+// .controller('AppCtrl',
+//   function () {
+//     this.movies = [];
+
+//     this.addMovie = (movie) => {
+//       this.shelf.unshift(movie);
+//     }
+//     this.addMovie = this.addMovie.bind(this);
+
+//     this.searchResults = (data) => {
+//       this.movies = data.results;
+//       console.log('UPDATED MOVIES', this.movies);
+//     };
+//   })
+//   .component('app', {
+//     bindings: {},
+//     controller: 'AppCtrl',
+//     templateUrl: '/templates/app.html'
+//   });
 
 
 
