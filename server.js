@@ -19,6 +19,9 @@ db.once('open', () => {
 //ROUTES
 app.use(express.static('client'));
 
+app.post('/movies', (req, res) => {
+    console.log('ROUTE HIT ! gimmie some itunes movies')
+})
 
 //NOW LISTEN
 app.listen(PORT, (err) => {

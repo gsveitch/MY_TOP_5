@@ -1,1 +1,1 @@
-angular.module('my-top-5', []);
+angular.module('movie-shelf', []);

@@ -1,23 +1,24 @@
 <div>
-    <h1>My real Top 5</h1>
+    <h1>Movie Shelf</h1>
     <nav>
-        <button type="button" class="btn btn-primary" ng-click="$ctrl.goToX('home')">Home</button>
-        <button type="button" class="btn btn-success" ng-click="$ctrl.goToX('maker')">Make a Top 5 list!</button>
+        search goes here
     </nav>
-    <div ng-if="$ctrl.whereAmI === 'home'">
-        <!-- attach Top5List module /> -->
-        <span>HOME</span>
-        <Top5List
-            Top5s="$ctrl.top5s"
-            on-click="$ctrl.selectTop5"
-        ></Top5List>
-    </div>
-    <div ng-if="$ctrl.whereAmI === 'maker'">
-        <!-- attach maker module -->
-        <span>MAKER</span>
-    </div>
-    <div ng-if="$ctrl.whereAmI === 'top5'">
-        <!-- attach top5 module -->
-        <span>TOP5</span>
+    
+    <div class="container fluid">
+        <div class="row">
+            <div class="col-sm-7">
+                search results list goes here
+                <movie-list
+                    movies="$ctrl.movies"
+                    on-click="$ctrl.addMovie"
+                ></movie-list>
+            </div>
+            <div class="col-sm-5">
+                movie shelf goes here
+                <shelf
+                    my-movies="$ctrl.myMovies"
+                ></shelf>
+            </div>
+        </div>
     </div>
 </div>
