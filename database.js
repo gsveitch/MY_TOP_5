@@ -75,9 +75,15 @@ const addReview = (movieId, review) => {
     .exec()
     .then(movie => movie || Promise.reject(new Error(`No movie found with movieId: ${movieId}`)))
     .then((movie) => {
-      movie.reviews.push(review)
-      return movie.save();
-    })
+      const userAlreadyReviewed = !!movie.reviews.find(oldReview => oldReview.userId === review.userId);
+
+      if (userAlreadyReviewed) {
+        return Promise.reject(new Error('User has already reviewed movie'));
+      } else {
+        movie.reviews.push(review);
+        return movie.save();
+      }
+    });
 };
 
 module.exports.remove = remove;
