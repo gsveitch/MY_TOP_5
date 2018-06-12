@@ -1,10 +1,11 @@
 // APP REQUIREMENTS
 require('dotenv').config();
 const express = require('express');
+const axios = require('axios');
 const app = express();
 const bodyParser = require('body-parser');
-const PORT = process.env.PORT;
-var db = require('./database.js');
+const { PORT, MOVIEDB } = process.env;
+var db = require('../database.js');
 
 //ROUTES
 app.use(express.static('client'));
@@ -43,6 +44,18 @@ app.delete("/shelf", function (req, res) {
         }
     });
 });
+
+app.post('/search', (req, res) => {
+    const { query } = req.body;
+    console.log(query, req.body);
+    axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${MOVIEDB}&query=` + query)
+        .then(function (response) {
+            res.status(200).send(response.data);
+        })
+        .catch(function (err) {
+            res.status(500).send(err);
+        });
+})
 
 //NOW LISTEN
 app.listen(PORT, (err) => {
