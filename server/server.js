@@ -1,10 +1,11 @@
 // APP REQUIREMENTS
 require('dotenv').config();
 const express = require('express');
+const axios = require('axios');
 const app = express();
 const bodyParser = require('body-parser');
-const PORT = process.env.PORT;
-var db = require('./database.js');
+const { PORT, MOVIEDB } = process.env;
+var db = require('../database.js');
 
 //ROUTES
 app.use(express.static('client'));
@@ -44,6 +45,27 @@ app.delete("/shelf", function (req, res) {
     });
 });
 
+app.get('/search', (req, res) => {
+    const { query } = req.query;
+    axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${MOVIEDB}&query=` + query)
+        .then((response) => {
+            res.status(200).send(response.data);
+        })
+        .catch((err) => {
+            res.status(500).send(err);
+        });
+})
+
+app.get('/searchVideo', (req, res) => {
+  const { id } = req.query;
+  axios.get(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=${MOVIEDB}`)
+    .then((response) => {
+      res.status(200).send(response.data);
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
+});
 app.post('/review', (req, res) => {
   const { movieId, userId, message } = req.body;
 
@@ -54,6 +76,6 @@ app.post('/review', (req, res) => {
 
 //NOW LISTEN
 app.listen(PORT, (err) => {
-    console.log(err || `listening on port ${PORT}`);
+  console.log(err || `listening on port ${PORT}`);
 });
 
