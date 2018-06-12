@@ -1,7 +1,19 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const session = require('cookie-session');
-const { User } = require('database')
+const { User } = require('database');
+const app = require('server');
+
+const cookie = {
+  secret: process.env.Cookie,
+  cookie: {
+    maxAge: 86400000, // 1 day
+  }
+}
+
+app.use(session(cookie));
+app.use(passport.initialize());
+app.use(passport.session());
 
 passport.serializeUser((user, done) => done(null, user.id));
 passport.deserializedUser((id, done) => {
@@ -28,9 +40,6 @@ passport.use(new GoogleStrategy({
   }
 ));
 
-app.get('/auth/google',
-    passport.authenticate('google', {
-      scope: 'https://www.google.com/m8/feeds' 
-    }));
+
 
 
