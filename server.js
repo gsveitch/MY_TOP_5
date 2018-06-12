@@ -1,6 +1,8 @@
 // APP REQUIREMENTS
 require('dotenv').config();
 const express = require('express');
+const session = require('cookie-session');
+const passport = require('passport');
 const app = express();
 const bodyParser = require('body-parser');
 const PORT = process.env.PORT;
@@ -11,6 +13,16 @@ app.use(express.static('client'));
 app.use(express.static('node_modules'));
 app.use(bodyParser.urlencoded({ 'extended': 'true' }));
 app.use(bodyParser.json());
+//Passport
+const cookie = {
+    secret: process.env.Cookie || 'moonie',
+    cookie: {
+        maxAge: 86400000, // 1 day
+    }
+}
+app.use(session(cookie));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.get('/shelf', function (req, res) {
     db.selectAll(function (err, data) {
@@ -42,6 +54,24 @@ app.delete("/shelf", function (req, res) {
             res.end("that was rotten anyways!");
         }
     });
+});
+
+app.get('/auth', (req, res) => res.send({
+    user: req.user || null
+}));
+
+app.get('/auth/google', passport.authenticate('google', {
+    scope: ['profile'],
+}));
+
+app.get('/auth/google/redirect', passport.authenticate('google', {
+    successRedirect: '/',
+    failureRedirect: '/fail',
+}));
+
+app.get('/logout', (req, res) => {
+    req.logout();
+    res.redirect('/login');
 });
 
 //NOW LISTEN
