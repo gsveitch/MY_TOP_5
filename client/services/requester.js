@@ -16,7 +16,7 @@ angular.module('movie-shelf')
   .service('TheMovieDB', function ($http) {
     this.search = function (query) {
       return new Promise((resolve, reject) => {
-        $http.post(`/search`, {query})
+        $http.get(`/search`, { params: { query } })
           .then((response) => {
             resolve(response.data);
           })
@@ -28,7 +28,7 @@ angular.module('movie-shelf')
 
     this.searchVideos = function (id) {
       return new Promise((resolve, reject) => {
-        $http.post('/searchVideo', {id})
+        $http.get('/searchVideo', { params: {id} })
           .then(function (response) {
             // resolves an array of video reference objects
             resolve(response.data.results);
