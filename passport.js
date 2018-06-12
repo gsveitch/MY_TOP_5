@@ -40,6 +40,19 @@ passport.use(new GoogleStrategy({
   }
 ));
 
+app.get('/', (req, res) => res.send({
+  user: req.user || null
+}));
+
+app.get('/google', passport.authenticate('google', {
+  scope: ['profile'],
+}));
+
+app.get('/google/redirect', passport.authenticate('google', {
+  successRedirect: '/create_game',
+  failureRedirect: '/play',
+}));
+
 
 
 
