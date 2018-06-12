@@ -3,7 +3,12 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const session = require('cookie-session');
 const { User } = require('database')
 
-
+passport.serializeUser((user, done) => done(null, user.id));
+passport.deserializedUser((id, done) => {
+  User.findById(id)
+  .then(user => done(null, user))
+  .catch(error => done(error));
+});
 
 passport.use(new GoogleStrategy({
     consumerKey: proccess.env.Client_ID,
