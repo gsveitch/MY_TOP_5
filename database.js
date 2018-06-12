@@ -23,6 +23,13 @@ var movieSchema = mongoose.Schema({
 
 var Movie = mongoose.model('Movie', movieSchema);
 
+const userSchema = mongoose.Schema({
+  username: String,
+  googleId: String,
+});
+
+const User = mongoose.model('User', userSchema);
+
 var selectAll = function (callback) {
   Movie.find({}, function (err, items) {
     if (err) {
@@ -68,3 +75,4 @@ var update = function (movieId, callback) {
 module.exports.remove = remove;
 module.exports.selectAll = selectAll;
 module.exports.add = add;
+module.exports.User = User;
