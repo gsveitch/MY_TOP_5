@@ -12,8 +12,8 @@ app.use(express.static('node_modules'));
 app.use(bodyParser.urlencoded({ 'extended': 'true' }));
 app.use(bodyParser.json());
 
-app.get('/shelf', function (req, res) {
-    db.selectAll(function (err, data) {
+app.get('/shelf', (req, res) => {
+    db.selectAll((err, data) => {
         if (err) {
             res.sendStatus(500);
         } else {
@@ -22,9 +22,9 @@ app.get('/shelf', function (req, res) {
     });
 });
 
-app.post('/shelf', function (req, res) {
+app.post('/shelf', (req, res) => {
     //console.log(req.body);
-    db.add(req.body.params.movie, function (err, res) {
+    db.add(req.body.params.movie, (err, res) => {
         if (err) {
             res.sendStatus(500);
         } else {
@@ -33,9 +33,9 @@ app.post('/shelf', function (req, res) {
     });
 });
 
-app.delete("/shelf", function (req, res) {
+app.delete("/shelf", (req, res) => {
     console.log(req.body);
-    db.remove(req.body.movieId, function (err) {
+    db.remove(req.body.movieId, (err) => {
         if (err) {
             res.sendStatus(404);
         } else {
