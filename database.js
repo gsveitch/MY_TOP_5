@@ -10,15 +10,19 @@ db.once('open', () => {
   console.log(`connected to mongoose at ${MONGO_URI}`);
 });
 
-var movieSchema = mongoose.Schema({
-  title: String,
-  director: String,
-  year: String,
-  art: String,
-  url: String,
-  trailer: String,
-  longDescription: String,
-  comments: Array,
+const movieSchema = mongoose.Schema({
+  movieId: Number,
+  favorites: {
+    type: Number,
+    default: 0,
+  },
+  reviews: {
+    type: [{
+      message: String,
+      userId: Number,
+    }],
+    default: [],
+  },
 });
 
 var Movie = mongoose.model('Movie', movieSchema);
