@@ -13,6 +13,20 @@ angular.module('movie-shelf')
         });
     };
   })
+  .service('TheMovieDB', function ($http) {
+    this.search = function (query) {
+      return new Promise((resolve, reject) => {
+        $http.get(`https://api.themoviedb.org/3/search/movie?api_key=44a2806dc36690e1da45fc1349e8845f&query=` + query)
+          .then(function (response) {
+            resolve(response.data);
+          })
+          .catch(function (err) {
+            reject(err);
+          });
+      });
+    };
+
+  })
   .service('server', function ($http) {
     this.getShelf = function (callback) {
       $http
