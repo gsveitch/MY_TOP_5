@@ -45,8 +45,8 @@ app.delete("/shelf", function (req, res) {
     });
 });
 
-app.post('/search', (req, res) => {
-    const { query } = req.body;
+app.get('/search', (req, res) => {
+    const { query } = req.query;
     axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${MOVIEDB}&query=` + query)
         .then((response) => {
             res.status(200).send(response.data);
@@ -56,8 +56,8 @@ app.post('/search', (req, res) => {
         });
 })
 
-app.post('/searchVideo', (req, res) => {
-    const { id } = req.body;
+app.get('/searchVideo', (req, res) => {
+    const { id } = req.query;
     axios.get(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=${MOVIEDB}`)
         .then((response) => {
             res.status(200).send(response.data);
