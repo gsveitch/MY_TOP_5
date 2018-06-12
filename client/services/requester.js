@@ -26,6 +26,19 @@ angular.module('movie-shelf')
       });
     };
 
+    this.searchVideos = function (id) {
+      return new Promise((resolve, reject) => {
+        $http.get(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=44a2806dc36690e1da45fc1349e8845f`)
+          .then(function (response) {
+            // resolves an array of video reference objects
+            resolve(response.data.results);
+          })
+          .catch(function (err) {
+            reject(err);
+          });
+      });
+    };
+
   })
   .service('server', function ($http) {
     this.getShelf = function (callback) {
