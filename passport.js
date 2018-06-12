@@ -1,20 +1,25 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const session = require('cookie-session');
+const { User } = require('database')
 
 
 
 passport.use(new GoogleStrategy({
     consumerKey: proccess.env.Client_ID,
     consumerSecret: process.env.Secret,
-    callbackURL: "http://localhost:8080/auth/google/redirect"
+    callbackURL: "/auth/google/redirect"
   },
   function (token, tokenSecret, profile, done) {
-    User.findOrCreate({
+    User.findOne({
       googleId: profile.id
-    }, function (err, user) {
-      return done(err, user);
-    });
+    })
+      .then(currentUser => currentUser || new User({
+          username: profile.displayName,
+          googleId: profile.id,
+        }).save())
+        .then(user => done(null, user))
+        .catch(error => done(error));
   }
 ));
 
