@@ -53,6 +53,9 @@ app.get('/auth/google/redirect', passport.authenticate('google', {
   failureRedirect: '/fail',
 }));
 
-
+app.get('/logout', (req, res) => {
+  req.logout();
+  res.redirect('/login');
+})
 
 
