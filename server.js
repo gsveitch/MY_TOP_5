@@ -2,7 +2,8 @@
 require('dotenv').config();
 const express = require('express');
 const session = require('cookie-session');
-const passport = require('passport');
+const passport = require('passport')
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const app = express();
 const bodyParser = require('body-parser');
 const PORT = process.env.PORT;
