@@ -69,6 +69,20 @@ var update = function (movieId, callback) {
     callback(movie);
   });
 }
+
+const addReview = (movieId, review) => {
+  return Movie.findOne({ movieId: movieId })
+    .exec()
+    .then(movie => movie || Promise.reject(new Error(`No movie found with movieId: ${movieId}`)))
+    .then((movie) => {
+      movie.reviews.push(review)
+      return movie.save();
+    })
+};
+
 module.exports.remove = remove;
 module.exports.selectAll = selectAll;
 module.exports.add = add;
+module.exports.addReview = addReview;
+
+module.exports.Movie = Movie;
