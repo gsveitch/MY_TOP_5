@@ -40,15 +40,15 @@ passport.use(new GoogleStrategy({
   }
 ));
 
-app.get('/', (req, res) => res.send({
+app.get('/auth', (req, res) => res.send({
   user: req.user || null
 }));
 
-app.get('/google', passport.authenticate('google', {
+app.get('/auth/google', passport.authenticate('google', {
   scope: ['profile'],
 }));
 
-app.get('/google/redirect', passport.authenticate('google', {
+app.get('/auth/google/redirect', passport.authenticate('google', {
   successRedirect: '/',
   failureRedirect: '/fail',
 }));
