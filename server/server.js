@@ -57,6 +57,10 @@ app.post('/search', (req, res) => {
         });
 })
 
+app.post('/searchVideo', (req, res) => {
+    
+});
+
 //NOW LISTEN
 app.listen(PORT, (err) => {
     console.log(err || `listening on port ${PORT}`);
