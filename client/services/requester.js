@@ -17,10 +17,10 @@ angular.module('movie-shelf')
     this.search = function (query) {
       return new Promise((resolve, reject) => {
         $http.post(`/search`, {query})
-          .then(function (response) {
+          .then((response) => {
             resolve(response.data);
           })
-          .catch(function (err) {
+          .catch((err) => {
             reject(err);
           });
       });
@@ -28,7 +28,7 @@ angular.module('movie-shelf')
 
     this.searchVideos = function (id) {
       return new Promise((resolve, reject) => {
-        $http.get(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=44a2806dc36690e1da45fc1349e8845f`)
+        $http.post('/searchVideo', {id})
           .then(function (response) {
             // resolves an array of video reference objects
             resolve(response.data.results);
