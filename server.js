@@ -4,7 +4,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const PORT = process.env.PORT;
-var db = require('./database.js');
+const db = require('./database/helpers');
 
 //ROUTES
 app.use(express.static('client'));

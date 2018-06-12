@@ -1,31 +1,4 @@
-// MONGOOSE REQUIREMENTS
-var mongoose = require('mongoose');
-const { MONGO_URI } = process.env;
-mongoose.connect(MONGO_URI, { useMongoClient: true })
-
-//MONGOOSE SETUP
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', () => {
-  console.log(`connected to mongoose at ${MONGO_URI}`);
-});
-
-const movieSchema = mongoose.Schema({
-  movieId: Number,
-  favorites: {
-    type: Number,
-    default: 0,
-  },
-  reviews: {
-    type: [{
-      message: String,
-      userId: Number,
-    }],
-    default: [],
-  },
-});
-
-var Movie = mongoose.model('Movie', movieSchema);
+const { Movie } = require('./');
 
 var selectAll = function (callback) {
   Movie.find({}, function (err, items) {
@@ -90,5 +63,3 @@ module.exports.remove = remove;
 module.exports.selectAll = selectAll;
 module.exports.add = add;
 module.exports.addReview = addReview;
-
-module.exports.Movie = Movie;
