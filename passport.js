@@ -49,8 +49,8 @@ app.get('/google', passport.authenticate('google', {
 }));
 
 app.get('/google/redirect', passport.authenticate('google', {
-  successRedirect: '/create_game',
-  failureRedirect: '/play',
+  successRedirect: '/',
+  failureRedirect: '/fail',
 }));
 
 
