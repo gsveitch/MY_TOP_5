@@ -1,71 +1,52 @@
-// APP REQUIREMENTS
 require('dotenv').config();
 const express = require('express');
-const axios = require('axios');
-const app = express();
 const bodyParser = require('body-parser');
-const { PORT, MOVIEDB } = process.env;
-var db = require('../database.js');
+const axios = require('axios');
 
-//ROUTES
+const db = require('./database/helpers');
+
+const app = express();
+const { PORT, MOVIEDB } = process.env;
+const MOVIE_API = 'https://api.themoviedb.org/3';
+
 app.use(express.static('client'));
 app.use(express.static('node_modules'));
 app.use(bodyParser.urlencoded({ 'extended': 'true' }));
 app.use(bodyParser.json());
 
-app.get('/shelf', function (req, res) {
-    db.selectAll(function (err, data) {
-        if (err) {
-            res.sendStatus(500);
-        } else {
-            res.json(data);
-        }
-    });
+app.get('/shelf', (req, res) => {
+  db.getAllMovies()
+    .then(movies => res.send({ data: movies, error: null }))
+    .catch(error => res.status(500).send({ error: error.message }));
 });
 
-app.post('/shelf', function (req, res) {
-    //console.log(req.body);
-    db.add(req.body.params.movie, function (err, res) {
-        if (err) {
-            res.sendStatus(500);
-        } else {
-            res.end("movie on the shelf!");
-        }
-    });
+app.post('/shelf', (req, res) => {
+  db.createMovie(req.body.params.movie)
+    .then(newMovie => res.send({ data: newMovie, error: null }))
+    .catch(error => res.status(500).send({ error: error.message }));
 });
 
-app.delete("/shelf", function (req, res) {
-    console.log(req.body);
-    db.remove(req.body.movieId, function (err) {
-        if (err) {
-            res.sendStatus(404);
-        } else {
-            res.end("that was rotten anyways!");
-        }
-    });
+app.delete('/shelf', (req, res) => {
+  db.removeMovie(movieId)
+    .then(data => res.send({ data, error: null }))
+    .catch(error => res.status(500).send({ error: error.message }))
 });
 
 app.get('/search', (req, res) => {
-    const { query } = req.query;
-    axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${MOVIEDB}&query=` + query)
-        .then((response) => {
-            res.status(200).send(response.data);
-        })
-        .catch((err) => {
-            res.status(500).send(err);
-        });
+  const { query } = req.query;
+
+  axios.get(`${MOVIE_API}/search/movie?api_key=${MOVIEDB}&query=${query}`)
+    .then(response => res.status(200).send(response.data))
+    .catch(error => res.status(500).send({ error: error.message }));
 })
 
 app.get('/searchVideo', (req, res) => {
   const { id } = req.query;
-  axios.get(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=${MOVIEDB}`)
-    .then((response) => {
-      res.status(200).send(response.data);
-    })
-    .catch((err) => {
-      res.status(500).send(err);
-    });
+  axios.get(`${MOVIE_API}/movie/${id}/videos?api_key=${MOVIEDB}`)
+    .then(response => res.status(200).send(response.data))
+    .catch(error => res.status(500).send({ error: error.message }));
 });
+
 app.post('/review', (req, res) => {
   const { movieId, userId, message } = req.body;
 
@@ -74,8 +55,4 @@ app.post('/review', (req, res) => {
     .catch(error => res.status(500).send({ error: error.message }))
 });
 
-//NOW LISTEN
-app.listen(PORT, (err) => {
-  console.log(err || `listening on port ${PORT}`);
-});
-
+app.listen(PORT, error => console.log(error || `Listening on port ${PORT}`));
