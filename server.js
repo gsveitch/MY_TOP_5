@@ -1,47 +1,33 @@
-// APP REQUIREMENTS
 require('dotenv').config();
 const express = require('express');
-const app = express();
 const bodyParser = require('body-parser');
-const PORT = process.env.PORT;
+
 const db = require('./database/helpers');
 
-//ROUTES
+const app = express();
+const { PORT } = process.env;
+
 app.use(express.static('client'));
 app.use(express.static('node_modules'));
 app.use(bodyParser.urlencoded({ 'extended': 'true' }));
 app.use(bodyParser.json());
 
-app.get('/shelf', function (req, res) {
-    db.selectAll(function (err, data) {
-        if (err) {
-            res.sendStatus(500);
-        } else {
-            res.json(data);
-        }
-    });
+app.get('/shelf', (req, res) => {
+  db.getAllMovies()
+    .then(movies => res.send({ data: movies, error: null }))
+    .catch(error => res.status(500).send({ error: error.message }));
 });
 
-app.post('/shelf', function (req, res) {
-    //console.log(req.body);
-    db.add(req.body.params.movie, function (err, res) {
-        if (err) {
-            res.sendStatus(500);
-        } else {
-            res.end("movie on the shelf!");
-        }
-    });
+app.post('/shelf', (req, res) => {
+  db.createMovie(req.body.params.movie)
+    .then(newMovie => res.send({ data: newMovie, error: null }))
+    .catch(error => res.status(500).send({ error: error.message }));
 });
 
-app.delete("/shelf", function (req, res) {
-    console.log(req.body);
-    db.remove(req.body.movieId, function (err) {
-        if (err) {
-            res.sendStatus(404);
-        } else {
-            res.end("that was rotten anyways!");
-        }
-    });
+app.delete('/shelf', (req, res) => {
+  db.removeMovie(movieId)
+    .then(data => res.send({ data, error: null }))
+    .catch(error => res.status(500).send({ error: error.message }))
 });
 
 app.post('/review', (req, res) => {
@@ -52,8 +38,5 @@ app.post('/review', (req, res) => {
     .catch(error => res.status(500).send({ error: error.message }))
 });
 
-//NOW LISTEN
-app.listen(PORT, (err) => {
-    console.log(err || `listening on port ${PORT}`);
-});
+app.listen(PORT, error => console.log(error || `Listening on port ${PORT}`));
 
