@@ -69,6 +69,26 @@ var update = function (movieId, callback) {
     callback(movie);
   });
 }
+
+const addReview = (movieId, review) => {
+  return Movie.findOne({ movieId: movieId })
+    .exec()
+    .then(movie => movie || Promise.reject(new Error(`No movie found with movieId: ${movieId}`)))
+    .then((movie) => {
+      const userAlreadyReviewed = !!movie.reviews.find(oldReview => oldReview.userId === review.userId);
+
+      if (userAlreadyReviewed) {
+        return Promise.reject(new Error('User has already reviewed movie'));
+      } else {
+        movie.reviews.push(review);
+        return movie.save();
+      }
+    });
+};
+
 module.exports.remove = remove;
 module.exports.selectAll = selectAll;
 module.exports.add = add;
+module.exports.addReview = addReview;
+
+module.exports.Movie = Movie;
