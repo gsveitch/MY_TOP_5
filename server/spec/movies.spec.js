@@ -99,9 +99,18 @@ describe('movies', () => {
     });
   });
 
-  describe('on put', () => {
-  });
-
   describe('on delete', () => {
+    it('removes a movie', () => {
+      axios.delete(endpoint, { movieId })
+        .then((response) => {
+          expect(response.status).to.equal(200);
+          expect(response.data.error).to.be.null;
+          expect(response.data.data).to.be.true;
+        })
+        .then(() => Movie.findOne({ movieId }).exec())
+        .then((movie) => {
+          expect(movie).to.be.null;
+        });
+    });
   });
 });
