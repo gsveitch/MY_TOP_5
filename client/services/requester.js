@@ -38,7 +38,7 @@ angular.module('movie-shelf')
       $http.get('/searchCast', { params: { id } })
         .then((response) => {
           // resolves an array of objects containing data about the cast
-          resolve(response.data.results);
+          resolve(response.data);
         })
         .catch((err) => {
           reject(err);
