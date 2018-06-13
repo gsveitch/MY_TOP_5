@@ -15,9 +15,11 @@ app.use(bodyParser.urlencoded({ 'extended': 'true' }));
 app.use(bodyParser.json());
 
 app.get('/movies', (req, res) => {
-  db.getAllMovies()
-    .then(movies => res.send({ data: movies, error: null }))
-    .catch(error => res.status(500).send({ error: error.message }));
+  const { movieId } = req.query;
+
+  (movieId ? db.findMovie(movieId) : db.getAllMovies())
+    .then(data => res.send({ data, error: null }))
+    .catch(error => res.status(500).send({ error: error.message }))
 });
 
 app.post('/movies', (req, res) => {
