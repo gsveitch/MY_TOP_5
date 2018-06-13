@@ -25,6 +25,7 @@ module.exports = (app) => {
     clientID: process.env.ClientID,
     clientSecret: process.env.Secret,
   }, (accessToken, refreshToken, profile, done) => {
+    console.log(profile.id);
     User.findOne({
       googleId: profile.id,
     })
