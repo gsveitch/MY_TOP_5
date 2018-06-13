@@ -2,8 +2,9 @@
 require('dotenv').config();
 const express = require('express');
 const session = require('cookie-session');
-const passport = require('passport')
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const passport = require('passport');
+const passportSetup = require('./passportSetup');
+const GoogleStrategy = require('passport-google-oauth20');
 const app = express();
 const bodyParser = require('body-parser');
 const PORT = process.env.PORT;
@@ -15,13 +16,12 @@ app.use(express.static('node_modules'));
 app.use(bodyParser.urlencoded({ 'extended': 'true' }));
 app.use(bodyParser.json());
 //Passport
-const cookie = {
+app.use(session({
     secret: process.env.Cookie || 'moonie',
     cookie: {
         maxAge: 86400000, // 1 day
     }
-}
-app.use(session(cookie));
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -65,10 +65,9 @@ app.get('/auth/google', passport.authenticate('google', {
     scope: ['profile'],
 }));
 
-app.get('/auth/google/redirect', passport.authenticate('google', {
-    successRedirect: '/',
-    failureRedirect: '/fail',
-}));
+app.get('/auth/google/redirect', (req, res) => {
+    res.send('Gotcha boy');
+});
 
 app.get('/logout', (req, res) => {
     req.logout();
