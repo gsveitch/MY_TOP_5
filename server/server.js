@@ -55,12 +55,22 @@ app.get('/searchVideo', (req, res) => {
     .catch(error => res.status(500).send({ error: error.message }));
 });
 
+app.get('/searchCast', (req, res) => {
+  const { id } = req.query;
+  axios.get(`${MOVIE_API}/movie/${id}/credits?api_key=${MOVIEDB}`)
+    .then((response) => {
+      const { cast, crew } = response.data;
+      res.status(200).send({ cast, crew });
+    })
+    .catch(error => res.status(500).send({ error: error.message }));
+});
+
 app.post('/review', (req, res) => {
   const { movieId, userId, message } = req.body;
 
   db.addReview(movieId, { userId, message })
     .then(movie => res.send({ data: movie, error: null }))
-    .catch(error => res.status(500).send({ error: error.message }))
+    .catch(error => res.status(500).send({ error: error.message }));
 });
 
 app.listen(PORT, error => console.log(error || `Listening on port ${PORT}`));

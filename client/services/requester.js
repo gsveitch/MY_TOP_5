@@ -33,6 +33,17 @@ angular.module('movie-shelf')
           reject(err);
         });
     });
+
+    this.searchCast = id => new Promise((resolve, reject) => {
+      $http.get('/searchCast', { params: { id } })
+        .then((response) => {
+          // resolves an object with arrays on .cast and .crew  of objects containing data about the cast
+          resolve(response.data);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
   })
   .service('server', function ($http) {
     this.getShelf = (callback) => {
