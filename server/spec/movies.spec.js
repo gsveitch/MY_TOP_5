@@ -25,11 +25,13 @@ describe('movies', () => {
   describe('on get', () => {
     it('returns all the movies', (done) => {
       axios.get(endpoint)
-        .then((response) => {
-          expect(response.status).to.equal(200);
-          expect(response.data.error).to.be.null;
-          expect(response.data.data).to.be.an('array');
-          expect(response.data.data[0].movieId).to.equal(movieId);
+        .then(({ status, data }) => {
+          const { data: movies, error } = data;
+
+          expect(status).to.equal(200);
+          expect(error).to.be.null;
+          expect(movies).to.be.an('array');
+          expect(movies[movies.length - 1].movieId).to.equal(movieId);
 
           done();
         });
@@ -92,6 +94,18 @@ describe('movies', () => {
         .catch((error) => {
           expect(error).to.exist;
           expect(error.response.status).to.equal(400);
+          expect(error.response.data.error).to.be.a('string');
+
+          done();
+        });
+    });
+
+    it('returns an error movieId is already used', (done) => {
+      payload.movieId = movieId;
+      axios.post(endpoint, payload)
+        .catch((error) => {
+          expect(error).to.exist;
+          expect(error.response.status).to.equal(500);
           expect(error.response.data.error).to.be.a('string');
 
           done();
