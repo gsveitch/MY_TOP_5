@@ -46,6 +46,17 @@ describe('movies', () => {
           done();
         });
     });
+
+    it('returns an error when cannot find a movie with movieId', (done) => {
+      axios.get(`${endpoint}?movieId=222222`)
+        .catch((error) => {
+          expect(error).to.exist;
+          expect(error.response.status).to.equal(500);
+          expect(error.response.data.error).to.be.a('string');
+
+          done();
+        });
+    });
   });
 
   describe('on post', () => {
