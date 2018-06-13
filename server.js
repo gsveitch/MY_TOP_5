@@ -51,22 +51,7 @@ app.delete("/shelf", function (req, res) {
     });
 });
 
-app.get('/auth', (req, res) => res.send({
-    user: req.user || null
-}));
 
-app.get('/auth/google', passport.authenticate('google', {
-    scope: ['profile'],
-}));
-
-app.get('/auth/google/redirect', (req, res) => {
-    res.send('Gotcha boy');
-});
-
-app.get('/logout', (req, res) => {
-    req.logout();
-    res.redirect('/');
-});
 
 //NOW LISTEN
 app.listen(PORT, (err) => {
