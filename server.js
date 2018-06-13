@@ -16,14 +16,8 @@ app.use(express.static('node_modules'));
 app.use(bodyParser.urlencoded({ 'extended': 'true' }));
 app.use(bodyParser.json());
 //Passport
-app.use(session({
-    secret: process.env.Cookie || 'moonie',
-    cookie: {
-        maxAge: 86400000, // 1 day
-    }
-}));
-app.use(passport.initialize());
-app.use(passport.session());
+
+passportSetup(app);
 
 app.get('/shelf', function (req, res) {
     db.selectAll(function (err, data) {
