@@ -25,9 +25,11 @@ app.get('/movies', (req, res) => {
 app.post('/movies', (req, res) => {
   const { movieId } = req.body;
 
-  db.createMovie(movieId)
-    .then(newMovie => res.send({ data: newMovie, error: null }))
-    .catch(error => res.status(500).send({ error: error.message }));
+  !movieId
+    ? res.status(400).send({ error: 'Expected body to include movieId' })
+    : db.createMovie(movieId)
+      .then(newMovie => res.send({ data: newMovie, error: null }))
+      .catch(error => res.status(500).send({ error: error.message }));
 });
 
 app.put('/movies', (req, res) => {
