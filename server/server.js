@@ -32,15 +32,12 @@ app.post('/movies', (req, res) => {
       .catch(error => res.status(500).send({ error: error.message }));
 });
 
-app.put('/movies', (req, res) => {
-  // db.updateMovie()
-  res.send(req.body);
-});
-
 app.delete('/movies', (req, res) => {
+  const { movieId } = req.body;
+
   db.removeMovie(movieId)
-    .then(data => res.send({ data, error: null }))
-    .catch(error => res.status(500).send({ error: error.message }))
+    .then(() => res.send({ data: true, error: null }))
+    .catch(error => res.status(500).send({ error: error.message }));
 });
 
 app.get('/search', (req, res) => {
