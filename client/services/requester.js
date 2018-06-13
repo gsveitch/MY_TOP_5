@@ -37,8 +37,8 @@ angular.module('movie-shelf')
     this.searchCast = id => new Promise((resolve, reject) => {
       $http.get('/searchCast', { params: { id } })
         .then((response) => {
-          // resolves an array of objects containing data about the cast
-          resolve(response.data.results);
+          // resolves an object with arrays on .cast and .crew  of objects containing data about the cast
+          resolve(response.data);
         })
         .catch((err) => {
           reject(err);
