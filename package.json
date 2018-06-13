@@ -25,21 +25,11 @@
     "axios": "^0.18.0",
     "body-parser": "^1.18.2",
     "bootstrap": "^3.3.7",
-<<<<<<< HEAD
-    "cookie-session": "^2.0.0-beta.3",
-    "dotenv": "^4.0.0",
-    "express": "^4.16.2",
-    "jquery": "^3.2.1",
-    "passport": "^0.4.0",
-    "passport-google-oauth": "^1.0.0",
-    "passport-google-oauth20": "^1.0.0"
-=======
     "chai": "^4.1.2",
     "dotenv": "^4.0.0",
     "express": "^4.16.2",
     "jquery": "^3.2.1",
     "mocha": "^5.2.0"
->>>>>>> 11d87df0837c210b6f75a519c9c09be2f2d61a53
   },
   "devDependencies": {
     "eslint": "^4.19.1",
