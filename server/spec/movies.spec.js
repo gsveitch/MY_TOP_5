@@ -60,7 +60,7 @@ describe('movies', () => {
   });
 
   describe('on post', () => {
-    const payload = { movieId: 121212 };
+    let payload = { movieId: 121212 };
 
     afterEach((done) => {
       Movie.findOneAndRemove({ movieId: payload.movieId })
@@ -81,6 +81,18 @@ describe('movies', () => {
               expect(movie).to.exist;
               expect(movie.movieId).to.equal(payload.movieId);
             });
+
+          done();
+        });
+    });
+
+    it('returns an error when not given movieId', (done) => {
+      payload.movieId = undefined;
+      axios.post(endpoint, payload)
+        .catch((error) => {
+          expect(error).to.exist;
+          expect(error.response.status).to.equal(400);
+          expect(error.response.data.error).to.be.a('string');
 
           done();
         });
