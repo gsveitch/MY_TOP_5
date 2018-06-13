@@ -34,6 +34,18 @@ describe('movies', () => {
           done();
         });
     });
+
+    it('return specific movie if given movieId param', (done) => {
+      axios.get(`${endpoint}?movieId=${movieId}`)
+        .then((response) => {
+          expect(response.status).to.equal(200);
+          expect(response.data.error).to.be.null;
+          expect(response.data.data).to.be.an('object');
+          expect(response.data.data.movieId).to.equal(movieId);
+
+          done();
+        });
+    });
   });
 
   describe('on post', () => {
