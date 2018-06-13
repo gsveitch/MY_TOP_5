@@ -5,10 +5,10 @@ const session = require('cookie-session');
 
 module.exports = (app) => {
   app.use(session({
-    secret: "yahamamam",
+    secret: 'yahamamam',
     cookie: {
-      maxAge: 86400000, //1 day
-    }
+      maxAge: 86400000, // 1 day
+    },
   }));
   app.use(passport.initialize());
   app.use(passport.session());
@@ -26,8 +26,8 @@ module.exports = (app) => {
     clientSecret: process.env.Secret,
   }, (accessToken, refreshToken, profile, done) => {
     User.findOne({
-        googleId: profile.id
-      })
+      googleId: profile.id,
+    })
       .then(currentUser => currentUser || new User({
         username: profile.displayName,
         googleId: profile.id,
