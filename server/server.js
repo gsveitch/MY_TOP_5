@@ -23,7 +23,9 @@ app.get('/movies', (req, res) => {
 });
 
 app.post('/movies', (req, res) => {
-  db.createMovie(req.body.params.movie)
+  const { movieId } = req.body;
+
+  db.createMovie(movieId)
     .then(newMovie => res.send({ data: newMovie, error: null }))
     .catch(error => res.status(500).send({ error: error.message }));
 });
@@ -45,7 +47,7 @@ app.get('/search', (req, res) => {
   axios.get(`${MOVIE_API}/search/movie?api_key=${MOVIEDB}&query=${query}`)
     .then(response => res.status(200).send(response.data))
     .catch(error => res.status(500).send({ error: error.message }));
-})
+});
 
 app.get('/searchVideo', (req, res) => {
   const { id } = req.query;

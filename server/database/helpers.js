@@ -4,7 +4,7 @@ const getAllMovies = () => Movie.find().exec();
 const findMovie = movieId => Movie.findOne({ movieId })
   .exec()
   .then(movie => movie || Promise.reject(new Error(`No movie found with movieId: ${movieId}`)));
-const createMovie = ({ movieId }) => {
+const createMovie = (movieId) => {
   const newMovie = new Movie({ movieId });
   return newMovie.save();
 };
