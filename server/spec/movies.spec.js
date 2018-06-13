@@ -60,6 +60,31 @@ describe('movies', () => {
   });
 
   describe('on post', () => {
+    const payload = { movieId: 121212 };
+
+    afterEach((done) => {
+      Movie.findOneAndRemove({ movieId: payload.movieId })
+        .exec()
+        .then(() => done());
+    });
+
+    it('creates a new movie', (done) => {
+      axios.post(endpoint, payload)
+        .then((response) => {
+          expect(response.status).to.equal(200);
+          expect(response.data.data).to.be.an('object');
+          expect(response.data.data.movieId).to.equal(payload.movieId);
+
+          Movie.findOne({ movieId: payload.movieId })
+            .exec()
+            .then((movie) => {
+              expect(movie).to.exist;
+              expect(movie.movieId).to.equal(payload.movieId);
+            });
+
+          done();
+        });
+    });
   });
 
   describe('on put', () => {
