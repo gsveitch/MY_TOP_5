@@ -14,19 +14,24 @@ app.use(express.static('node_modules'));
 app.use(bodyParser.urlencoded({ 'extended': 'true' }));
 app.use(bodyParser.json());
 
-app.get('/shelf', (req, res) => {
+app.get('/movies', (req, res) => {
   db.getAllMovies()
     .then(movies => res.send({ data: movies, error: null }))
     .catch(error => res.status(500).send({ error: error.message }));
 });
 
-app.post('/shelf', (req, res) => {
+app.post('/movies', (req, res) => {
   db.createMovie(req.body.params.movie)
     .then(newMovie => res.send({ data: newMovie, error: null }))
     .catch(error => res.status(500).send({ error: error.message }));
 });
 
-app.delete('/shelf', (req, res) => {
+app.put('/movies', (req, res) => {
+  // db.updateMovie()
+  res.send(req.body);
+});
+
+app.delete('/movies', (req, res) => {
   db.removeMovie(movieId)
     .then(data => res.send({ data, error: null }))
     .catch(error => res.status(500).send({ error: error.message }))
